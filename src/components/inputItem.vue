@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'inputItem',
   props: {
@@ -18,13 +19,14 @@ export default {
   },
   methods:{
       addItem:function(){
-          this.$store.commit("addItem",{
+          let item={
               isFinish: false, 
               content: this.inputValue, 
               isEdit: false, 
               isEditable: true,
               currentContent: this.inputValue
-              });
+          }
+          this.$store.dispatch("addItem",item)
         this.inputValue = null;
       }
   }

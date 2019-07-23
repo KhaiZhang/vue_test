@@ -2,8 +2,7 @@
   <div class="page_container">
   <div class="container">
     <div>
-      <h2>Jquery To Do List</h2>
-      <p class="tips">Simple Todo List with adding and filter by diff status</p>
+      <ToDoTitle :title = title  :subTitle = subTitle ></ToDoTitle>
       <inputItem></inputItem>
       <itemList></itemList>
       <selectItem></selectItem>
@@ -13,9 +12,11 @@
 </template>
 
 <script>
+import axios from 'axios'
 import inputItem from './inputItem.vue'
 import itemList from './itemList.vue'
 import selectItem from './selectItem.vue'
+import ToDoTitle from './ToDoTitle.vue'
 export default {
   name: 'ToDoList',
   props: {
@@ -24,10 +25,13 @@ export default {
   components:{
     inputItem,
     itemList,
-    selectItem
+    selectItem,
+    ToDoTitle
   },
   data() {
     return {
+      title : 'Jquery To Do List',
+      subTitle: 'Simple Todo List with adding and filter by diff status'
       // itemList:[],
       // inputValue:null,
       // selectTpye:'ALL',
@@ -64,7 +68,22 @@ export default {
     //     result.content =this.currentContent;
     //     result.isEdit = !result.isEdit;   
     // }
-  }
+  },
+    // mounted: function () {
+    //     this.$nextTick(function () {
+    //         axios.get('http://localhost:3001/todos')
+    //         .then(response => {
+    //           let itemList = response.data;
+    //           this.$store.dispatch("getItemList",itemList);
+    //       })   
+        
+    //   })
+    //   }
+    mounted: function () {
+        this.$nextTick(function () {
+          this.$store.dispatch("getItemList");
+      })
+      }
 }
 </script>
 
